@@ -1,0 +1,32 @@
+/* Search Bar */
+.search-container {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 45%;
+    transform: translateY(-55%);
+}
+
+.search-bar {
+    padding-left: 45px;
+}
+
+.search-bar:focus {
+    outline: none;
+}
+
+.clean-search-btn {
+    display: none;
+    position: absolute;
+    right: 25px;
+    top: 45%;
+    transform: translateY(-55%);
+    transition: all 0.2s ease;
+}
+
+.clean-search-btn:hover {
+    color: #DC3545;
+}

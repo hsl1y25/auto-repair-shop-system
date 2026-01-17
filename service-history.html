@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service History</title>
+    <!--Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!--jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!--Local CSS-->
+    <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/back-to-top-btn.css">
+</head>
+
+<body>
+    <!--Navigation Bar-->
+    <section id="navbarPlaceholder"></section>
+
+    <!--Title-->
+    <h1 class="text-center pt-4">Service History</h1>
+
+    <!--Vehicle Details-->
+    <section class="container-fluid">
+        <dl class="row">
+            <dt class="col-sm-4 col-md-3 col-lg-2">Plate Number</dt>
+            <dd class="col-sm-8 col-md-9 col-lg-10" id="plateNumberDisplay"></dd>
+            
+            <dt class="col-sm-4 col-md-3 col-lg-2">Make</dt>
+            <dd class="col-sm-8 col-md-9 col-lg-10" id="makeDisplay"></dd>
+            
+            <dt class="col-sm-4 col-md-3 col-lg-2">Model</dt>
+            <dd class="col-sm-8 col-md-9 col-lg-10" id="modelDisplay"></dd>
+            
+            <dt class="col-sm-4 col-md-3 col-lg-2">Owner</dt>
+            <dd class="col-sm-8 col-md-9 col-lg-10" id="ownerDisplay"></dd>
+            
+            <dt class="col-sm-4 col-md-3 col-lg-2">Owner Username</dt>
+            <dd class="col-sm-8 col-md-9 col-lg-10" id="ownerUsernameDisplay"></dd>
+        </dl>
+    </section>
+
+    <!--Service History Table-->
+    <section class="container-fluid table-responsive my-3" id="serviceHistoryTable">
+        <!--Edit Icons-->
+        <div class="text-end">
+            <!--Add Service History-->
+            <div class="btn d-none" id="addServiceHistoryIcon" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>
+            </div>
+
+            <!--Delete History-->
+            <div class="btn d-none" id="deleteServiceHistoryIcon" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                </svg>
+            </div>
+
+            <!--Finish-->
+            <button id="finishBtn" class="btn btn-primary d-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+                </svg>
+                <span>Finish</span>
+            </button>
+        </div>
+
+        <!--Table-->
+        <div class="table-responsive" style="max-height: calc(100vh - 200px);">
+            <table class="table table-bordered">
+                <!--Head-->
+                <thead class="table-dark sticky-top">
+                    <tr>
+                        <th>Date</th>
+                        <th>Service</th>
+                        <th>Mileage (km)</th>
+                        <th>Cost (RM)</th>
+                        <th>Technician</th>
+                        <th>Notes</th>
+                        <th class="d-none" id="deleteServiceColumn">Delete</th>
+                    </tr>
+                </thead>
+
+                <!--Body-->
+                <tbody id="serviceHistoryTableBody"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!--No Result Display-->
+    <h3 class="text-center text-secondary" id="noResultDisplay"></h3>
+
+    <!--Add Service History Modal-->
+    <div class="modal fade" id="addServiceHistoryModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header bg-dark">
+                    <h4 class="modal-title text-light">Add New Service History</h4>
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!--Modal Body-->
+                <div class="modal-body">
+                    <div id="addServiceHistoryForm">
+
+                        <!--Date-->
+                        <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date" class="form-control" id="dateInput">
+                            <div class="text-danger small" id="dateError"></div>
+                        </div>
+
+                        <!--Service-->
+                        <div class="mb-3">
+                            <label class="form-label">Service</label>
+                            <input type="text" class="form-control" id="serviceInput">
+                        </div>
+
+                        <!--Mileage-->
+                        <div class="mb-3">
+                            <label class="form-label">Mileage (km)</label>
+                            <input type="number" class="form-control" id="mileageInput">
+                            <div class="text-danger small" id="mileageError"></div>
+                        </div>
+
+                        <!--Cost-->
+                        <div class="mb-3">
+                            <label class="form-label">Cost (RM)</label>
+                            <input type="number" class="form-control" id="costInput">
+                            <div class="text-danger small" id="costError"></div>
+                        </div>
+
+                        <!--Technician-->
+                        <div class="mb-3">
+                            <label class="form-label">Technician</label>
+                            <select name="selected-technician" class="form-control" id="technicianInput">
+                                <option value="" disabled selected hidden>Select a technician</option>
+                                <option value="Arthur">Arthur</option>
+                                <option value="Wilston">Wilston</option>
+                                <option value="David">David</option>
+                            </select>
+                        </div>
+
+                        <!--Notes-->
+                        <div class="mb-3">
+                            <label class="form-label">Notes (optional)</label>
+                            <textarea type="text" class="form-control" id="notesInput" rows="3" placeholder="Enter notes"></textarea>
+                        </div>
+
+                        <!--Error Message-->
+                        <div class="text-danger small" id="modalErrorMessage"></div>
+                    </div>
+                </div>
+
+                <!--Modal Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="modalClearServiceHistoryBtn">Clear</button>
+                    <button type="button" class="btn btn-dark" id="modalAddServiceHistoryBtn">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Back to Top Button-->
+    <section class="d-none" id="backToTopBtnPlaceholder"></section>
+
+    <!--Link to JS file-->
+    <script src="JS/auth.js"></script>
+    <script src="JS/generalLoader.js"></script>
+    <script src="JS/vehicles.js"></script>
+    <script src="JS/serviceHistory.js"></script>
+</body>
+</html>

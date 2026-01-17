@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Inspection Report</title>
+    <!--Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!--jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!--Local CSS-->
+    <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/back-to-top-btn.css">
+    <link rel="stylesheet" href="CSS/inspection-report.css">
+</head>
+
+<body>
+    <!--Navigation Bar-->
+    <section id="navbarPlaceholder"></section>
+
+    <!--Contents-->
+    <section class="mx-1 mx-md-3 mx-lg-5 mb-5 d-flex flex-column gap-2 pt-4">
+        <!--Title-->
+        <h1 class="text-center">Digital Inspection Report</h1>
+
+        <!--Vehicle Details-->
+        <section>
+            <dl class="row">
+                <dt class="col-sm-4 col-md-3 col-lg-2">Plate Number</dt>
+                <dd class="col-sm-8 col-md-9 col-lg-10 plate-number-display"></dd>
+                
+                <dt class="col-sm-4 col-md-3 col-lg-2">Make</dt>
+                <dd class="col-sm-8 col-md-9 col-lg-10 make-display"></dd>
+                
+                <dt class="col-sm-4 col-md-3 col-lg-2">Model</dt>
+                <dd class="col-sm-8 col-md-9 col-lg-10 model-display"></dd>
+                
+                <dt class="col-sm-4 col-md-3 col-lg-2">Owner</dt>
+                <dd class="col-sm-8 col-md-9 col-lg-10" id="ownerDisplay"></dd>
+                
+                <dt class="col-sm-4 col-md-3 col-lg-2">Owner Username</dt>
+                <dd class="col-sm-8 col-md-9 col-lg-10" id="ownerUsernameDisplay"></dd>
+            </dl>
+        </section>
+
+        <!--Edit Icons-->
+        <section class="text-end">
+            <!--Add Report-->
+            <div class="btn d-none" id="addReportIcon" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>
+            </div>
+
+            <!--Delete Report-->
+            <div class="btn d-none" id="deleteReportIcon" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                </svg>
+            </div>
+
+            <!--Finish-->
+            <button class="btn btn-primary d-none" id="finishBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+                </svg>
+                <span>Finish</span>
+            </button>
+        </section>
+
+        <!--Latest Digital Inspection Report-->
+        <section class="latest-report-container shadow rounded-3 d-none" id="latestReportContainer">
+            <!--Header-->
+            <div class="header-container bg-info px-3 py-2 ">
+                <div class="fs-4 fw-bold text-white d-flex justify-content-between">
+                    <!--Title-->
+                    <div>
+                        Latest Inspection Report (<span class="latest-report-date"></span>)
+                    </div>
+                    
+                    <!--Delete button-->
+                    <div class="d-flex gap-2">
+                        <div class="download-report-btn btn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Download">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                            </svg>
+                        </div>
+
+                        <div class="delete-report-btn btn btn-danger d-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Details-->
+            <div class="details-container p-4 rounded-bottom-3">
+                <!--Upper section-->
+                <div class="row g-2">
+                    <div class="col-12 col-lg-6">
+                        <span class="fw-semibold">Inspection Date: </span>
+                        <span class="latest-report-date"></span>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <span class="fw-semibold">Plate Number: </span>
+                        <span class="plate-number-display"></span>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <span class="fw-semibold">Make: </span>
+                        <span class="make-display"></span>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <span class="fw-semibold">Model: </span>
+                        <span class="model-display"></span>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <span class="fw-semibold">Technician: </span>
+                        <span id="latestReportTechnician"></span>
+                    </div>
+                </div>
+                
+                <!--Title-->
+                <div class="mt-5 mb-3 fs-5 fw-bold">Inspection Result:</div>
+
+                <!--Inspection Result-->
+                <div class="row g-3">
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Engine</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestEngineResult"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Transmission</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestTransmissionResult"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Clutch</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestClutchResult"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Steering Mechanism</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestSteeringMechanismResult"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Horn</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestHornResult"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Wipers</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestWipersResult"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Rear Vision Mirrors</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestRearVisionMirrorsResult"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Lighting</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestLightingResult"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Brake</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestBrakeResult"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Tires</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestTiresResult"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="result-component border border-info border-2 d-flex justify-content-between align-items-center p-2 rounded-3">
+                            <div>Emergency Equipments</div>
+                            <div class="px-3 py-2 rounded-pill" id="latestEmergencyEquipmentsResult"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Comments-->
+                <div class="mt-5">
+                    <div class="fs-5 fw-bold mb-1">Comments:</div>
+                    <div id="latestComments"></div>
+                </div>
+            </div>
+        </section>
+
+        <!--No Report Placeholder-->
+        <section class="text-center fs-2 p-5 text-secondary d-none" id="noReportDisplay">No Report</section>
+
+        <!--Previous Inspection Report-->
+        <!--Title-->
+        <section class="fs-2 fw-semibold mt-4 d-none" id="previousReportTitle">Previous Inspection Reports</section>
+
+        <!--Reports Placeholder-->
+        <section class="d-flex flex-column gap-3" id="previousReportsPlaceholder"></section>
+    </section>
+
+    <!--Add Report Modal-->
+    <section class="modal fade" id="addReportModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header bg-dark">
+                    <h4 class="modal-title text-light">Add New Digital Inspection Report</h4>
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!--Modal Body-->
+                <div class="modal-body">
+                    <div id="addReportForm">
+                        <!--Date-->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold fs-5">Date</label>
+                            <input type="date" class="form-control" id="dateInput">
+                            <div class="text-danger small" id="dateError"></div>
+                        </div>
+
+                        <!--Technician-->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold fs-5">Technician</label>
+                            <select name="selected-technician" class="form-control" id="selectTechnician">
+                                <option value="" disabled selected hidden>Select a technician</option>
+                                <option value="Arthur">Arthur</option>
+                                <option value="Wilston">Wilston</option>
+                                <option value="David">David</option>
+                            </select>
+                        </div>
+
+                        <!--Checked Parts-->
+                        <div class="mb-3">
+                            <div class="fw-semibold mb-2 fs-5">Checked Parts</div>
+                            <div class="row g-3" id="modalCheckedParts"></div>
+                        </div>
+
+                        <!--Comments-->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold fs-5">Comments (optional)</label>
+                            <textarea type="text" class="form-control" id="commentsInput" rows="3" placeholder="Enter comments"></textarea>
+                        </div>
+
+                        <!--Error Message-->
+                        <div class="text-danger small" id="modalErrorMessage"></div>
+                    </div>
+                </div>
+
+                <!--Modal Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="modalClearReportBtn">Clear</button>
+                    <button type="button" class="btn btn-dark" id="modalAddReportBtn">Add</button>
+                </div> 
+            </div>
+        </div>
+    </section>
+
+    <!--Back to Top Button-->
+    <section class="d-none" id="backToTopBtnPlaceholder"></section>
+
+    <!--Link to JS file-->
+    <script src="JS/auth.js"></script>
+    <script src="JS/generalLoader.js"></script>
+    <script src="JS/vehicles.js"></script>
+    <script src="JS/inspectionReport.js"></script>
+</body>
+</html>

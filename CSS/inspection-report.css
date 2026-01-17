@@ -1,0 +1,43 @@
+.latest-report-container .header-container,
+.report-container .header-container {
+    border-radius: 7px 7px 0 0;
+}
+
+.report-container .header-container {
+    background-color: #f1ecec;
+}
+
+.latest-report-container .details-container {
+    background-color: rgb(242, 252, 254);
+}
+
+.result-component {
+    background-color: rgb(0, 0, 0, 0.02);
+}
+
+.pass {
+    background-color: rgb(212, 237, 218);
+    color: rgb(21, 87, 36);
+}
+
+.fail {
+    background-color: rgb(248, 215, 218);
+    color: rgb(114, 28, 36);
+}
+
+.na {
+    background-color: rgb(226, 227, 229);
+    color: rgb(56, 61, 65);
+}
+
+.collapse-icon {
+    transition: transform 0.3s ease;
+}
+
+.collapse-icon .collapsed {
+    transform: rotate(0deg);
+}
+        
+.collapse-icon:not(.collapsed) {
+    transform: rotate(180deg);
+}

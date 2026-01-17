@@ -1,0 +1,108 @@
+/* Edit Field */
+.quantity-edit-field,
+.cost-edit-field {
+    width: 80px;
+}
+
+/* Filter */
+.filter-container {
+    position: relative;
+    display: inline-block;
+}
+
+.filter-menu {
+    display: none;
+    position: absolute;  
+    top: 100%;
+    width: 300px;
+    max-width: calc(100vw - 20px);
+    padding: 20px;
+    margin-top: 10px;
+    z-index: 1050;
+    background-color: white;
+}
+
+@media screen and (max-width: 1024px) {
+    .filter-menu {
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .filter-menu {
+        width: 90vw;
+    }
+}
+
+.filter-close-btn {
+    padding: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    transition: all 0.2s ease;
+}
+
+.filter-close-btn:hover {
+    background-color: #DEE2E6
+}
+
+.filter-btn {
+    border: 0;
+    border-radius: 25px;
+    padding: 5px 15px;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    filter: brightness(0.96);
+}
+
+.filter-btn.selected {
+    background-color: black;
+    color: white;
+}
+
+.price-input {
+    width: 100px;
+    border: 2px solid #DEE2E6;
+    border-radius: 10px;
+    padding: 2px 8px;
+}
+
+.remove-filter-btn {
+    display: none;
+    transition: all 0.2s ease;
+}
+
+.remove-filter-btn:hover {
+    color: #DC3545;
+}
+
+/* Table */
+.table-responsive {
+    max-height: calc(100vh - 200px);
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table-img {
+    width: 150px;
+}
+
+.in-stock {
+    background-color: #D1E7DD; 
+    white-space: nowrap;
+}
+
+.low-stock {
+    background-color: #FFF3CD;
+    white-space: nowrap;
+}
+
+.out-of-stock {
+    background-color: #F8D7DA;
+    white-space: nowrap;
+}

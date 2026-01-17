@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!--Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!--jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!--Local CSS-->
+    <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/back-to-top-btn.css">
+    <link rel="stylesheet" href="CSS/hero-section.css">
+    <link rel="stylesheet" href="CSS/home.css">
+</head>
+
+<body>
+    <!--Navigation Bar-->
+    <section id="navbarPlaceholder"></section>
+
+    <!--Hero Section-->
+    <section class="hero-container mb-5">
+        <img class="hero-img" src="Images/Home/banner.jpg" alt="banner image">
+        <div class="hero-text">
+            <h1>Twelve Auto: Expert Car Care Services in Iskandar Puteri</h1>
+            <h5>From routine servicing to major repairs, our professional mechanics provide high quality, reliable, and transparent car care to keep you safe on the road.</h5>
+
+            <div class="hero-btns">
+                <button class="hero-btn1">View services</button>
+                <button class="hero-btn2">Make An Appointment</button>
+            </div>
+        </div>
+    </section>
+
+    <!--About Us-->
+    <section class="container px-3 py-3 col-xxl-8">
+        <div class="row flex-lg align-items-center">
+            <div class="col-12 col-lg-6">
+                <h1>Your Safety Is Our Top Priority</h1>
+                <p>We are dedicated to provide professional vehicle services. With modern equipment and responsible mechanics, we ensure every vehicle is serviced with precision and care. At our core, we don't just service vehicles — we safeguard your journeys.</p>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <img class="img-fluid" src="Images/Home/about-image.jpg" alt="a man is servicing a car">
+            </div>
+        </div>           
+    </section>
+
+    <!--Our Services-->
+    <section class="container px-2 py-5" id="services">
+        <!--Title-->
+        <h1 class="text-center mb-4">Our Services</h1>
+
+        <!--Cards-->
+        <div class="row flex-lg align-items-center g-4">
+            <div class="col-12 col-sm-6 col-lg-4 service-card">
+                <div class="card border-0 p-0">
+                    <img class="card-img-top rounded-5" src="Images/Home/engine.jpg" alt="engine">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end p-0">
+                        <div class="bg-dark bg-opacity-75 p-3 text-white rounded-bottom-5 service-text">
+                            <h3 class="card-title">Engine Repairs</h3>
+                            <p class="card-text hidden-text">With advanced equipments, we diagnose and repair engine issues efficiently to restore performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4 service-card">
+                <div class="card border-0 p-0">
+                    <img class="card-img-top rounded-5" src="Images/Home/battery.jpg" alt="battery">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end p-0">
+                        <div class="bg-dark bg-opacity-75 p-3 text-white rounded-bottom-5 service-text">
+                            <h3 class="card-title">Battery Replacement</h3>
+                            <p class="card-text hidden-text">Quick and reliable battery testing and replacement to keep your vehicle starting without trouble.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4 service-card">
+                <div class="card border-0 p-0">
+                    <img class="card-img-top rounded-5" src="Images/Home/brake.jpg" alt="brake">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end p-0">
+                        <div class="bg-dark bg-opacity-75 p-3 text-white rounded-bottom-5 service-text">
+                            <h3 class="card-title">Brake Inspection</h3>
+                            <p class="card-text hidden-text">Keep your journeys safety with regular check and mantainance of your vehicle's brake system.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4 service-card">
+                <div class="card border-0 p-0">
+                    <img class="card-img-top rounded-5" src="Images/Home/tyre.jpg" alt="tyre">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end p-0">
+                        <div class="bg-dark bg-opacity-75 p-3 text-white rounded-bottom-5 service-text">
+                            <h3 class="card-title">Tire Services</h3>
+                            <p class="card-text hidden-text">Tire inspection, replacement, and balancing services for better handling and safety.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4 service-card">
+                <div class="card border-0 p-0">
+                    <img class="card-img-top rounded-5" src="Images/Home/aircond.jpg" alt="aircond">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end p-0">
+                        <div class="bg-dark bg-opacity-75 p-3 text-white rounded-bottom-5 service-text">
+                            <h3 class="card-title">Air Conditioning Repairs</h3>
+                            <p class="card-text hidden-text">Professional air conditioning service to ensure optimal cooling for your driving comfort.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4 service-card">
+                <div class="card border-0 p-0">
+                    <img class="card-img-top rounded-5" src="Images/Home/engineoil.jpg" alt="engine oil">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end p-0">
+                        <div class="bg-dark bg-opacity-75 p-3 text-white rounded-bottom-5 service-text">
+                            <h3 class="card-title">Engine Oil and Coolant Change</h3>
+                            <p class="card-text hidden-text">Regular engine oil and coolant change to protect your engine and improve vehicle lifespan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Back to Top Button-->
+    <section class="d-none" id="backToTopBtnPlaceholder"></section>
+
+    <!--Footer-->
+    <footer class="container-fluid bg-dark">
+        <div class="container px-5 py-5">
+            <div class="row g-4">
+                <!--Location-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="d-flex align-items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-pin-map-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8z"/>
+                            <path fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-light">Location</h3>
+                            <p class="text-light text-opacity-75">
+                                12, Jalan Damai,<br>
+                                Taman Medini,<br>
+                                79050 Iskandar Puteri,<br>
+                                Johor Darul Takzim.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Phone number-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="d-flex align-items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-light">Phone</h3>
+                            <p class="text-light text-opacity-75">+601234567890</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Email-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="d-flex align-items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-light">Email</h3>
+                            <p class="text-light text-opacity-75">contact@12auto.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Business hour-->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="d-flex align-items-start gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-clock-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-light">Business Hour</h3>
+                            <p class="text-light text-opacity-75">
+                                Monday to Friday<br>
+                                8:00 AM to 6:00 PM<br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--Link to JS file-->
+    <script src="JS/auth.js"></script>
+    <script src="JS/generalLoader.js"></script>
+    <script src="JS/home.js"></script>
+</body>
+</html>

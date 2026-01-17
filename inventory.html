@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <!--Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!--jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!--Local CSS-->
+    <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/back-to-top-btn.css">
+    <link rel="stylesheet" href="CSS/search-bar.css">
+    <link rel="stylesheet" href="CSS/inventory.css">
+</head>
+
+<body>
+    <!--Navigation Bar-->
+    <section id="navbarPlaceholder"></section>
+
+    <!--Inventory Title-->
+    <h1 class="text-center pt-4">Parts Inventory</h1>
+
+    <!--Search Function-->
+    <section class="text-center my-4">
+        <!--Search Bar Container-->
+        <span class="search-container">
+            <!--Search Icon-->
+            <span class="search-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
+            </span>
+
+            <!--Search Bar-->
+            <input class="search-bar form-control-lg col-9 col-lg-6 rounded-5 border-0 shadow mx-1" type="text" placeholder="Search parts" id="searchBar">
+
+            <!--Clean Search Button-->
+            <span class="clean-search-btn" id="cleanSearchBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                </svg>
+            </span>
+        </span>
+        
+        <!--Filter-->
+        <span class="filter-container mx-1" id="filterContainer">
+            <!--Filter Icon-->
+            <span class="filter-icon" id="filterIcon" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Filters">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                    <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z"/>
+                </svg>
+            </span>
+
+            <!--Filter Menu-->
+            <div class="filter-menu shadow rounded-4 text-start" id="filterMenu">
+                <!--Close Button-->
+                <div class="filter-close-btn d-flex align-items-center" id="filterCloseBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                    </svg>
+                </div>
+
+                <!--Category Filter-->
+                <div class="filter-section">
+                    <h5>Category</h5>
+                    <div class="d-flex flex-wrap gap-2" id="categoryFilters">
+                        <button class="filter-btn" data-category="Lightings">Lightings</button>
+                        <button class="filter-btn" data-category="Electrical">Electrical</button>
+                        <button class="filter-btn" data-category="Tires">Tires</button>
+                        <button class="filter-btn" data-category="Cooling">Cooling</button>
+                        <button class="filter-btn" data-category="Body">Body</button>
+                        <button class="filter-btn" data-category="Other">Other</button>
+                    </div>
+                </div>
+
+                <!--Availability Filter-->
+                <div class="filter-section my-3">
+                    <h5>Availability</h5>
+                    <div class="d-flex flex-wrap gap-2" id="availabilityFilter">
+                        <button class="filter-btn" data-availability="in-stock">In Stock</button>
+                        <button class="filter-btn" data-availability="low-stock">Low Stock</button>
+                        <button class="filter-btn" data-availability="out-of-stock">Out of Stock</button>
+                    </div>
+                </div>
+
+                <!--Price Range Filter-->
+                <div class="filter-section">
+                    <h5>Price Range</h5>
+                    <input type="number" class="price-input" id="minPrice" placeholder="Min">
+                    <span>-</span>
+                    <input type="number" class="price-input" id="maxPrice" placeholder="Max">
+                    <div class="text-danger small" id="priceRangeError" style="display: none;"></div>
+                </div>
+
+                <!--Footer Button-->
+                <div class="mt-3 row gx-4">
+                    <div class="col-6">
+                        <button class="btn btn-danger w-100" id="resetFilterBtn">Reset</button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-dark w-100" id="applyFilterBtn">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </span>  
+
+        <!--Remove Filter-->
+        <span class="remove-filter-btn" id="removeFilterBtn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Remove Filter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+        </span>
+    </section>
+
+    <!--Add and Edit Button-->
+    <section class="text-end mx-3 my-2">
+        <!--Add-->
+        <span class="btn" id="addBtn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Add">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+            </svg>
+        </span>
+
+        <!--Edit-->
+        <span class="btn" id="editBtn" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+            </svg>
+        </span>
+
+        <!--Cancel Editing-->
+        <button id="cancelEditBtn" class="btn btn-danger d-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+            <span>Cancel</span>
+        </button>
+
+        <!--Finish Editing-->
+        <button id="finishEditBtn" class="btn btn-primary d-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+            </svg>
+            <span>Finish Editing</span>
+        </button>
+    </section>
+
+    <!--Inventory Table-->
+    <section class="table-responsive" id="inventoryTable">
+        <table class="table table-hover">
+            <!--Head-->
+            <thead class="table-dark sticky-top">
+                <tr>
+                    <th>Image</th>
+                    <th>Part Name</th>
+                    <th>Category</th>
+                    <th>Cost (Rm)</th>
+                    <th>Quantity</th>
+                    <th>Availability</th>
+                    <th class="d-none" id="deleteColumn">Delete</th>
+                </tr>
+            </thead>
+
+            <!--Body-->
+            <tbody id="inventoryTableBody"></tbody>
+        </table>
+    </section>
+
+    <!--No Result Display-->
+    <h3 class="text-center text-secondary" id="noResultDisplay"></h3>
+
+    <!--Back to Top Button-->
+    <section class="d-none" id="backToTopBtnPlaceholder"></section>
+
+    <!--Add Part Modal-->
+    <div class="modal fade" id="addPartModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header bg-dark">
+                    <h4 class="modal-title text-light">Add New Part</h4>
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!--Modal Body-->
+                <div class="modal-body">
+                    <div id="addPartForm">
+
+                        <!--Part Name-->
+                        <div class="mb-3">
+                            <label class="form-label">Part Name</label>
+                            <input type="text" class="form-control" id="partNameInput">
+                            <div class="text-danger small" id="partNameError"></div>
+                        </div>
+
+                        <!--Category-->
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select name="category" class="form-control" id="categoryInput">
+                                <option value="" disabled selected hidden>Select a category</option>
+                                <option value="Lightings">Lightings</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Tires">Tires</option>
+                                <option value="Cooling">Cooling</option>
+                                <option value="Body">Body</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <!--Cost-->
+                        <div class="mb-3">
+                            <label class="form-label">Cost (RM)</label>
+                            <input type="number" class="form-control" id="costInput">
+                            <div class="text-danger small" id="costError"></div>
+                        </div>
+
+                        <!--Quantity-->
+                        <div class="mb-3">
+                            <label class="form-label">Quantity</label>
+                            <input type="number" class="form-control" id="quantityInput">
+                            <div class="text-danger small" id="quantityError"></div>
+                        </div>
+
+                        <!--Image-->
+                        <div class="mb-3">
+                            <label class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" accept="image/jpeg, image/png, image/jpg" id="imageInput">
+                            <div class="text-danger small" id="imageError"></div>
+                        </div>
+
+                        <!--Error Message-->
+                        <div class="text-danger small" id="addPartModalError"></div>
+                    </div>
+                </div>
+
+                <!--Modal Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="modalClearPartBtn">Clear</button>
+                    <button type="button" class="btn btn-dark" id="modalAddPartBtn">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Link to JS file-->
+    <script src="JS/auth.js"></script>
+    <script src="JS/generalLoader.js"></script>
+    <script src="JS/inventory.js"></script>
+</body>
+</html>

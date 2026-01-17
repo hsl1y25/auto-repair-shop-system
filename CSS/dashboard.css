@@ -1,0 +1,51 @@
+/* 4 Info Cards */
+.today-appointments-card {
+    background-image: linear-gradient(to bottom, rgb(47, 115, 252), rgb(178, 204, 255));
+}
+
+.upcoming-appointments-card {
+    background-image: linear-gradient(to bottom, rgb(2, 158, 117), rgb(152, 228, 209));
+}
+
+.inventory-alerts-card {
+    background-image: linear-gradient(to bottom, rgb(255, 183, 0), rgb(250, 227, 167));
+}
+
+.due-soon-services-card {
+    background-image: linear-gradient(to bottom, rgb(128, 112, 253), rgb(219, 213, 253));
+}
+
+/* Big Section */
+.big-section-content {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.no-content {
+    height: 250px;
+}
+
+.big-section-content-card {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.appointment-card:hover {
+    background-color: rgb(238, 238, 247) !important;
+}
+
+.inventory-card.border-danger:hover {
+    background-color: rgb(252, 232, 232) !important;
+}
+
+.inventory-card.border-warning:hover {
+    background-color: rgb(245, 245, 203) !important;
+}
+
+.services-card.border-danger:hover {
+    background-color: rgb(252, 232, 232) !important;
+}
+
+.services-card.border-warning:hover {
+    background-color: rgb(245, 245, 203) !important;
+}

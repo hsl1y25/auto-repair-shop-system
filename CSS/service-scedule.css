@@ -1,0 +1,24 @@
+.overdue-container {
+    border: 1px solid rgb(220, 53, 69);
+    border-left: 5px solid rgb(220, 53, 69);
+    border-radius: 7px;
+    background-color: rgb(255, 245, 245);
+}
+
+.due-soon-container {
+    border: 1px solid rgb(255, 202, 44);
+    border-left: 5px solid rgb(255, 202, 44);
+    border-radius: 7px;
+    background-color: rgb(250, 248, 227);
+}
+
+.upcoming-container {
+    border: 1px solid rgb(13, 202, 240);
+    border-left: 5px solid rgb(13, 202, 240);
+    border-radius: 7px;
+    background-color: rgb(245, 252, 255);
+}
+
+.semi-transperent-black-bg {
+    background-color: rgba(0, 0, 0, 0.07);
+}

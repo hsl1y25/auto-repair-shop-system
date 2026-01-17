@@ -1,0 +1,8 @@
+/* Back to Top Button */
+.back-to-top-btn {
+    transition: 0.2s ease;
+}
+
+.back-to-top-btn:hover {
+    filter: opacity(0.9);
+}

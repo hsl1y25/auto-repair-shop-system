@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Cost Calculator</title>
+    <!--Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!--jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!--Local CSS-->
+    <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/inventory.css">
+    <link rel="stylesheet" href="CSS/search-bar.css">
+</head>
+
+<body>
+    <!--Navigation Bar-->
+    <section id="navbarPlaceholder"></section>
+
+    <!--Calculator-->
+    <section class="pt-2 pt-lg-3"> 
+        <div class="container p-0 mb-2">
+            <!--Calculator Title-->
+            <h1 class="col-12 text-center py-3 mb-4">Job Cost Calculator</h1>
+
+            <!--Calculator Body-->
+            <div class="border border-dark border-2 bg-light row g-4 px-2 px-lg-5 py-4 mx-1 mx-sm-0">
+                <!--Input Fields-->
+                <div class="col-12 col-lg-6 d-flex flex-column gap-4 m-0 pe-0 pe-lg-3 pb-4 pb-lg-0" id="inputFields">
+                    <!--Parts Used-->
+                    <div class="d-flex flex-column gap-2">
+                        <!--Title-->
+                        <div class="fs-4 fw-semibold">Parts Used</div>
+
+                        <!--Button-->
+                        <div>
+                            <button class="btn btn-dark btn-sm" id="browsePartsBtn">
+                                <span>Browse Parts</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+                                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!--Used Part Table-->
+                        <div class="table-responsive p-0 d-none" style="max-height: 400px;" id="selectedPartsTable">
+                            <table class="table table-bordered">
+                                <!--Head-->
+                                <thead class="table-secondary sticky-top">
+                                    <tr>
+                                        <th>Part Name</th>
+                                        <th>Used Quantities</th>
+                                        <th>Cost (RM)</th>
+                                        <th>Subtotal (RM)</th>
+                                    </tr>
+                                </thead>
+
+                                <!--Body-->
+                                <tbody id="selectedPartsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!--Labor Cost-->
+                    <div class="d-flex flex-column gap-2">
+                        <div class="fs-4 fw-semibold">Labor Cost</div>
+
+                        <div>
+                            <div>Labor Hours:</div>
+                            <input class="col-12 p-2 border border-dark rounded-2" type="number" id="laborHours" min="0" value="0">
+                            <div class="text-danger small" id="laborHoursError"></div>
+                        </div>
+
+                        <div>
+                            <div>Labor Rate (RM/hour):</div>
+                            <input class="col-12 p-2 border border-dark rounded-2" type="number" id="laborRate" min="0" value="0">
+                            <div class="text-danger small" id="laborRateError"></div>
+                        </div>
+                    </div>
+
+                    <!--Additional Charges-->
+                    <div class="d-flex flex-column gap-2">
+                        <div class="fs-4 fw-semibold">Additional Charges</div>
+
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="fw-normal">Description</th>
+                                        <th class="fw-normal">Amount</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="additionalChargesRow"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="text-danger small text-end" id="chargeAmountError"></div>
+
+                        <div>
+                            <button class="btn btn-dark btn-sm" id="addRowBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                                </svg>
+                                <span>Add Row</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!--Buttons-->
+                    <div>
+                        <button class="btn btn-danger btn-lg" id="resetBtn">Reset</button>
+                        <button class="btn btn-dark btn-lg" id="calcBtn">Calculate Cost</button>
+                        <div class="text-danger small pt-1" id="calcError"></div>
+                    </div>
+                </div>
+
+                <!--Output-->
+                <div class="col-12 col-lg-6 m-0 pw-0 pw-lg-3 pt-4 pt-lg-0" id="outputContainer">
+                    <div class="col-12 bg-white">
+                        <div class="bg-light fs-2 fw-semibold" id="outputTitle">Job Cost:</div>
+
+                        <div class="p-3 d-flex flex-column gap-4 shadow rounded-3" id="outputArea">
+                            <span class="text-secondary fs-5">Enter details to view the cost here.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Parts Modal-->
+    <div class="modal fade" id="partsModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header bg-dark">
+                    <h4 class="modal-title text-light">Select Parts</h4>
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!--Modal Body-->
+                <div class="modal-body">
+                    <!--Search Functions-->
+                    <section class="mb-3 text-center">
+                        <!--Search Bar Container-->
+                        <span class="search-container">
+                            <!--Search Icon-->
+                            <span class="search-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                            </span>
+
+                            <!--Search Bar-->
+                            <input class="search-bar form-control-lg col-12 col-lg-8 rounded-5 border-0 shadow mx-1" type="text" placeholder="Search parts" id="modalSearchBar">
+
+                            <!--Clean Search Button-->
+                            <span class="clean-search-btn" id="modalCleanSearchBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                                </svg>
+                            </span>
+                        </span>
+                    </section>
+
+                    <!--Display Parts-->
+                    <section class="table-responsive" style="max-height: 400px;">
+                        <table class="table table-hover">
+                            <!--Head-->
+                            <thead class="table-dark sticky-top">
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Used Quantity</th>
+                                    <th>Image</th>
+                                    <th>Part Name</th>
+                                    <th>Category</th>
+                                    <th>Cost (RM)</th>
+                                    <th>Quantity</th>
+                                    <th>Availability</th>
+                                </tr>
+                            </thead>
+
+                            <!--Body-->
+                            <tbody id="modalDisplayParts"></tbody>
+                        </table>
+                    </section>
+
+                    <!--No Result Display-->
+                    <h3 class="text-center" id="modalNoResult"></h3>
+                </div>
+
+                <!--Modal Footer-->
+                <div class="modal-footer text-center">
+                    <div class="col-12">
+                        <div class="text-danger small" id="quantityError"></div>
+                    </div>
+                    <button type="button" class="btn btn-danger" id="modalClearBtn">Clear</button>
+                    <button type="button" class="btn btn-dark" id="modalConfirmBtn">Confirm Selection</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Back to Top Button-->
+    <section class="d-none" id="backToTopBtnPlaceholder"></section>
+
+    <!--Link to JS file-->
+    <script src="JS/auth.js"></script>
+    <script src="JS/generalLoader.js"></script>
+    <script src="JS/inventory.js"></script>
+    <script src="JS/jobCostCalculator.js"></script>
+</body>
+</html>

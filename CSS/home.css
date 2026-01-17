@@ -1,0 +1,17 @@
+.service-card .hidden-text {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.service-card .service-text {
+    height: 25%;
+    transition: height 0.8s ease;
+}
+
+.service-card.hovered .hidden-text {
+    opacity: 1;
+}
+
+.service-card.hovered .service-text {
+    height: 45%;
+}
