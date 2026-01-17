@@ -68,12 +68,14 @@ $(document).ready(function () {
         authManager.updateNavbar();
 
         // Avoid navbar from covering content
-        const navbarHeight = $(".navbar").outerHeight();
-        $("body").css("margin-top", navbarHeight + 20 + "px");
+        setTimeout(function() {
+            const navbarHeight = $(".navbar").outerHeight();
+            $("body").css("margin-top", navbarHeight + "px");
+        }, 50);
         
         $(window).resize(function() {
             const navbarHeight = $(".navbar").outerHeight();
-            $("body").css("margin-top", navbarHeight + 20 + "px");
+            $("body").css("margin-top", navbarHeight + "px");
         });
 
         // Load tooltips
