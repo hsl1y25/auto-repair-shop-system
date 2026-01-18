@@ -511,7 +511,7 @@ const calculator = {
                     <th class="fw-normal">${selectedPart.name}</th>
                     <th class="fw-normal">${selectedPart.usedQuantity}</th>
                     <th class="fw-normal">${selectedPart.cost}</th>
-                    <th class="fw-normal">${selectedPart.subtotal}</th>
+                    <th class="fw-normal">${selectedPart.subtotal.toFixed(2)}</th>
                 </tr>        
             `);
 
