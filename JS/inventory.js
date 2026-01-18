@@ -108,7 +108,12 @@ const filterFunction = {
 
         $(".filter-btn").removeClass("selected");
         $(".price-input").val("");
-        $("#priceRangeError").hide();
+    },
+
+    // Clear error function
+    clearError() {
+        $("#priceRangeError").text("");
+        $("#filterError").text("");
     },
 
     // Apply filter function
@@ -117,11 +122,17 @@ const filterFunction = {
         const min = $("#minPrice").val() ? parseFloat($("#minPrice").val()) : null;
         const max = $("#maxPrice").val() ? parseFloat($("#maxPrice").val()) : null;
 
+        // Check at least one input
+        if (selectedCategories.length === 0 && selectedAvailability.length === 0 && min === null && max === null) {
+            $("#filterError").text("Please select at least one condition.");
+            return;
+        }
+
         // Check price range input
         if (min > max) {
-            $("#priceRangeError").show().text("Min can't be bigger than max.")
+            $("#priceRangeError").text("Min can't be bigger than max.");
         } else if (min < 0 || max < 0) {
-            $("#priceRangeError").show().text("Price should not be negative.")
+            $("#priceRangeError").text("Price should not be negative.");
         } else {
             // Update price range
             selectedPriceRange.min = min;
@@ -349,10 +360,12 @@ const filterFunction = {
         // Reset 
         $("#resetFilterBtn").on("click", function() {
             filterFunction.resetFilter();
+            filterFunction.clearError();
         });
 
         // Apply
         $("#applyFilterBtn").on("click", function() {
+            filterFunction.clearError();
             filterFunction.applyFilter();
         });
 
@@ -360,6 +373,7 @@ const filterFunction = {
         $("#removeFilterBtn").on("click", function() {
             // Reset the filter values
             filterFunction.resetFilter();
+            filterFunction.clearError();
 
             // Update the display
             filterFunction.updateResult(currentSearchQuery, selectedCategories, selectedAvailability, selectedPriceRange);
