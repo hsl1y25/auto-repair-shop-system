@@ -305,7 +305,7 @@ const calculator = {
             if (description && amount) {
                 userInput.additionalCharges.push({
                     description: description,
-                    amount: parseFloat((amount).val())
+                    amount: parseFloat(amount.val())
                 });
             }
         });
@@ -354,7 +354,7 @@ const calculator = {
         }
 
         // Check if at least one field is filled
-        if (input.selectedParts.length === 0 && input.laborHours === 0 && input.laborRate === 0 && input.additionalCharges.length === 0) {
+        if (input.selectedParts.length === 0 && input.laborHours * input.laborRate === 0 && input.additionalCharges.length === 0) {
             $("#calcError").text("Please fill in at least one field.").show();
             return false;
         }
@@ -372,8 +372,10 @@ const calculator = {
         });
         
         // Get labor cost
-        const totalLaborCost = input.laborHours * input.laborRate;
-        const laborCostCalculation = `${input.laborHours} hours x RM ${input.laborRate}/hour = RM ${totalLaborCost}`;
+        const laborHours = input.laborHours;
+        const laborRate = input.laborRate;
+        const totalLaborCost = laborHours * laborRate;
+        const laborCostCalculation = `${laborHours.toFixed(2)} hours x RM ${laborRate.toFixed(2)}/hour = RM ${totalLaborCost.toFixed(2)}`;
         
         // Get total additional charges
         let totalAdditionalCharges = 0;
@@ -386,11 +388,11 @@ const calculator = {
 
         // Return an object of result for display purpose
         const calcResult = {
-            totalPartsCost: totalPartsCost,
-            totalLaborCost: totalLaborCost,
+            totalPartsCost: totalPartsCost.toFixed(2),
+            totalLaborCost: totalLaborCost.toFixed(2),
             laborCostCalculation: laborCostCalculation,
-            totalAdditionalCharges: totalAdditionalCharges,
-            totalJobCost: totalJobCost
+            totalAdditionalCharges: totalAdditionalCharges.toFixed(2),
+            totalJobCost: totalJobCost.toFixed(2)
         };
 
         return calcResult;
@@ -466,11 +468,11 @@ const calculator = {
             filledField.parts = true;
         }
 
-        if (resultObject.totalLaborCost !== 0) {
+        if (parseFloat(resultObject.totalLaborCost) !== 0) {
             filledField.labor = true;       
         }
 
-        if (resultObject.totalAdditionalCharges !== 0) {
+        if (parseFloat(resultObject.totalAdditionalCharges) !== 0) {
             filledField.additionalCharges = true;   
         }
 
@@ -523,7 +525,7 @@ const calculator = {
             const additionalChargeRow = $(`
                 <tr>
                     <th class="fw-normal">${charge.description}</th>
-                    <th class="fw-normal">${charge.amount}</th>
+                    <th class="fw-normal">${charge.amount.toFixed(2)}</th>
                 </tr>         
             `);
 
