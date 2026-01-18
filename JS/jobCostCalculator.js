@@ -186,7 +186,7 @@ const modalFunctions = {
                     <th class="fw-normal">${selectedPart.name}</th>
                     <th class="fw-normal">${selectedPart.usedQuantity}</th>
                     <th class="fw-normal">${selectedPart.cost}</th>
-                    <th class="fw-normal">${selectedPart.subtotal}</th>
+                    <th class="fw-normal">${selectedPart.subtotal.toFixed(2)}</th>
                 </tr>        
             `);
 
@@ -439,7 +439,7 @@ const calculator = {
                     <table class="table table-bordered">
                         <thead class="table-info sticky-top">
                             <tr>
-                                <th>Charges</th>
+                                <th>Description</th>
                                 <th>Amount</th>
                             </tr>
                         </thead>
